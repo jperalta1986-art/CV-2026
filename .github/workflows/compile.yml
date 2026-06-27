@@ -1,0 +1,67 @@
+name: Compile Resume
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Python Dependencies
+        run: pip install pdfplumber
+
+      - name: Validate Dates and Content Extraction (Inline Script)
+        run: |
+          python -c "
+          import pdfplumber
+          import re
+
+          def extract_years(filepath):
+              years = []
+              try:
+                  with pdfplumber.open(filepath) as pdf:
+                      for page in pdf.pages:
+                          text = page.extract_text()
+                          if text:
+                              found = re.findall(r'\b(19\d{2}|20\d{2})\b', text)
+                              years.extend([int(y) for y in found])
+              except Exception as e:
+                  print(f'Error reading {filepath}: {e}')
+              return max(years) if years else 0
+
+          cv_year = extract_years('CV_2022.pdf')
+          profile_year = extract_years('Profile-1.pdf')
+          resume_year = extract_years('Resume_2019-1.pdf')
+
+          print(f'CV_2022.pdf max year: {cv_year}')
+          print(f'Profile-1.pdf max year: {profile_year}')
+          print(f'Resume_2019-1.pdf max year: {resume_year}')
+
+          if profile_year < cv_year or profile_year < resume_year:
+              raise ValueError('Validation failed: Profile-1.pdf does not contain the newest dates.')
+
+          print('Validation passed: Profile-1.pdf contains the newest date metrics.')
+          "
+
+      - name: Compile LaTeX Document
+        uses: xu-cheng/latex-action@v3
+        with:
+          root_file: resume.tex
+          compiler: pdflatex
+
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: resume-pdf
+          path: resume.pdf
