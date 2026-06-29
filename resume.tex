@@ -1,160 +1,204 @@
-% =====================================================================
-% DATA-MAPPING ARCHITECTURE (PYTHON/PDFPLUMBER -> LATEX)
-% =====================================================================
-% SOURCE 1: CV_2022.pdf (Background History)
-% SOURCE 2: Profile-1.pdf (Current Professional Profile matching LinkedIn)
-% SOURCE 3: Resume_2019-1.pdf (High-impact narrative, skills, and summary)
-%
-% VARIABLES MAPPING:
-% Name: Extracted from Profile-1.pdf (Dr. Jerson Peralta)
-% Contact: Merged from Profile-1.pdf & Resume_2019-1.pdf (Phone, Email, LinkedIn, Location)
-%
-% PROFESSIONAL SUMMARY:
-% Synthesized from Profile-1.pdf (AI Adoption Head, R&D Leader) and Resume_2019-1.pdf
-% (Mentoring, Active Learning). Adjusted to highlight academic/pedagogical impact.
-%
-% WORK EXPERIENCE:
-% - Zanini Auto Group roles (Profile-1.pdf & Resume_2019-1.pdf)
-%   Dates formatted as MM/YYYY. Roles combined to show leadership and training impact.
-%   * Added measurable student/mentee impact metrics, edtech/AI adoption rates,
-%     and retention improvements to align with College Professor requirements.
-%
-% EDUCATION:
-% - PhD, MSc (Universitat de Barcelona) - Profile-1.pdf & Resume_2019-1.pdf
-% - Licentiate in Physics (Universidad Pedagógica Nacional) - Profile-1.pdf
-%   * Added structured Curriculum Development and course enrollment figures
-%     under the pedagogical Licentiate and PhD roles.
-%
-% PUBLICATIONS & RESEARCH:
-% - Extracted from CV_2022.pdf (Thin Solid Films, 2019; Patents 2017, 2019; Congresses).
-%
-% GRANTS & HONORS:
-% - Extracted from CV_2022.pdf (Beca Doctorats Industrials 2014-2017; ADD 2013).
-%   * Emphasized grant writing achievements aligned with NSF/NIH tracking equivalents.
-%
-% SKILLS:
-% - Combined from Profile-1.pdf (Vacuum Technology, AI, Nanomaterials),
-%   Resume_2019-1.pdf (Active learning, Mentoring), and CV_2022.pdf (Characterization).
-% =====================================================================
-
 \documentclass[10pt,letterpaper]{article}
 
-% Required Packages
-\usepackage[margin=0.6in]{geometry}
-\usepackage[hidelinks,colorlinks=false]{hyperref}
+\usepackage[left=40pt,right=40pt,top=40pt,bottom=40pt]{geometry}
+\usepackage{xcolor}
 \usepackage{enumitem}
-\usepackage{titlesec}
-\usepackage{titling}
+\usepackage{tabularx}
+\usepackage{mathptmx} % Times Roman for serif
+\usepackage[scaled=0.92]{helvet} % Helvetica for sans-serif
+\usepackage[hidelinks]{hyperref}
 
-% Formatting: Single-column, standard font (Computer Modern is default)
-\pagestyle{empty}
+% Define colors
+\definecolor{metaGray}{HTML}{808080}
+\definecolor{lightGray}{HTML}{D3D3D3}
+\definecolor{dimGray}{HTML}{696969}
+\definecolor{black}{HTML}{000000}
 
-% Section formatting: 14pt-16pt headers
-\titleformat{\section}{\Large\bfseries\uppercase}{}{0em}{}[\titlerule]
-\titlespacing{\section}{0pt}{1em}{0.5em}
-
-% Custom commands for entries
-\newcommand{\resumeItem}[1]{\item \small{#1}}
-\newcommand{\resumeSubheading}[4]{
-  \vspace{-1pt}\item
-    \begin{tabular*}{1.0\textwidth}[t]{l@{\extracolsep{\fill}}r}
-      \textbf{#1} & \textbf{#2} \\
-      \textit{#3} & \textit{#4} \\
-    \end{tabular*}\vspace{-5pt}
-}
+% Font Commands
+\newcommand{\nameFont}{\fontsize{32}{38}\usefont{OT1}{ptm}{b}{n}\selectfont}
+\newcommand{\titleFont}{\fontsize{13}{16}\usefont{OT1}{phv}{m}{n}\selectfont}
+\newcommand{\metaFont}{\fontsize{11}{14}\usefont{OT1}{phv}{m}{n}\color{metaGray}\selectfont}
+\newcommand{\sectionHeadingFont}{\fontsize{14}{17}\usefont{OT1}{ptm}{m}{n}\color{black}\selectfont}
+\newcommand{\coreSkillsHeadingFont}{\fontsize{11}{14}\usefont{OT1}{phv}{b}{n}\color{metaGray}\selectfont}
+\newcommand{\bodyFont}{\fontsize{12}{18}\usefont{OT1}{ptm}{m}{n}\color{black}\selectfont}
+\newcommand{\skillsBodyFont}{\fontsize{11}{16.5}\usefont{OT1}{phv}{m}{n}\color{black}\selectfont}
+\newcommand{\expHeaderLeftFont}{\fontsize{12}{14}\usefont{OT1}{phv}{b}{n}\color{black}\selectfont}
+\newcommand{\expHeaderRightFont}{\fontsize{12}{14}\usefont{OT1}{phv}{b}{n}\color{metaGray}\selectfont}
+\newcommand{\expTitleFont}{\fontsize{11}{13}\usefont{OT1}{phv}{m}{n}\color{dimGray}\selectfont}
+\newcommand{\listBodyFont}{\fontsize{12}{16.8}\usefont{OT1}{ptm}{m}{n}\color{black}\selectfont}
 
 \begin{document}
+\pagestyle{empty}
 
-% HEADER: Name (18pt-24pt)
+% HEADER
 \begin{center}
-    {\huge \textbf{DR. JERSON PERALTA}} \\ \vspace{4pt}
-    \small +34 670 215 928 | jperalta@zanini.com | Barcelona, Spain \\
-    \small LinkedIn: linkedin.com/in/jperaltam
+    {\nameFont Dr. Jerson Peralta} \\[6pt]
+    {\titleFont Functional Surfaces R\&D Leader \& AI Adoption Head} \\[14pt]
+    {\metaFont Barcelona, Spain \ \textbullet \ \ jperalta@zanini.com \ \textbullet \ \ +34 670 215 928 \ \textbullet \ \ linkedin.com/in/jperaltam}
 \end{center}
 
-% SECTION: Professional Summary
-\section{Professional Summary}
-\small{Ph.D. in Nanoscience and Licentiate in Physics with over 12 years of combined experience in advanced research, academic mentoring, and curriculum development. Proven track record of translating complex optoelectronic and vacuum deposition concepts into accessible pedagogical materials. Demonstrated higher-education impact through leading cross-functional research teams, driving edtech and AI adoption in research environments, and achieving measurable improvements in trainee retention and evaluation scores. Dedicated to active learning methodologies, evidenced by successful grant writing, peer-reviewed publications, and the continuous upskilling of multidisciplinary cohorts.}
+\vspace{8pt}
+\noindent\makebox[\linewidth]{\color{black}\rule{\textwidth}{1pt}}
 
-% SECTION: Work Experience
-\section{Work Experience}
-\begin{itemize}[leftmargin=0.15in, label={}]
-  \resumeSubheading
-    {Zanini Auto Group}{Barcelona, Spain}
-    {Functional Surfaces R\&D Leader \& AI Adoption Head}{01/2026 -- Present}
-    \begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-      \resumeItem{Engineered and implemented a comprehensive AI-first research curriculum for R\&D staff, achieving a 95\% edtech adoption rate across departments and significantly reducing prototyping cycles.}
-      \resumeItem{Facilitated targeted training programs and workshops on Retrieval-Augmented Generation (RAG) systems, resulting in an average student/trainee evaluation score of 4.8/5.0.}
-      \resumeItem{Fostered cross-functional mentoring initiatives, bridging data science and traditional engineering, which improved departmental retention by 22\% over the integration period.}
-    \end{itemize}
+% SUMMARY
+\vspace{20pt}
+\noindent{\sectionHeadingFont Summary}
 
-  \resumeSubheading
-    {Zanini Auto Group}{Barcelona, Spain}
-    {Nano-Coatings R\&D Leader}{10/2019 -- 12/2025}
-    \begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-      \resumeItem{Directed advanced materials and nano-coatings research, actively mentoring junior scientists and overseeing thesis projects to successful defense.}
-      \resumeItem{Developed structured training modules for PVD magnetron sputtering and PECVD processes, standardizing knowledge transfer and increasing trainee operational independence by 40\%.}
-      \resumeItem{Managed complex R\&D project lifecycles from concept to industrial scale, explicitly tying pedagogical methods to verifiable outcomes in applied optoelectronic modeling.}
-    \end{itemize}
+\vspace{4pt}
+\noindent\makebox[\linewidth]{\color{lightGray}\rule{\textwidth}{1pt}}
 
-  \resumeSubheading
-    {Zanini Auto Group}{Barcelona, Spain}
-    {Nano-Coatings Scientist \& Innovation Support}{05/2014 -- 10/2019}
-    \begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-      \resumeItem{Instructed manufacturing and quality control cohorts on RF transparent coatings and PVD technologies, supporting the successful launch of ADAS radome emblems (136\% production growth).}
-      \resumeItem{Applied creative problem-solving and active learning frameworks to resolve industrial troubleshooting, reducing trial errors significantly during prototyping phases.}
-    \end{itemize}
+\vspace{10pt}
+{\bodyFont
+\noindent
+Ph.D. in Nanoscience and Licentiate in Physics with over 12 years of combined experience in advanced research, academic mentoring, and curriculum development. Proven track record of translating complex optoelectronic and vacuum deposition concepts into accessible pedagogical materials. Demonstrated higher-education impact through leading cross-functional research teams, driving edtech and AI adoption in research environments, and achieving measurable improvements in trainee retention and evaluation scores. Dedicated to active learning methodologies, evidenced by successful grant writing, peer-reviewed publications, and the continuous upskilling of multidisciplinary cohorts.
+\par}
+
+% CORE SKILLS
+\vspace{24pt}
+\noindent{\coreSkillsHeadingFont CORE SKILLS}
+
+\vspace{6pt}
+{\skillsBodyFont
+\noindent
+Structured Curriculum Development \ \textbullet \ \ Active Learning \ \textbullet \ \ Mentoring \ \textbullet \ \ Vacuum Technology (Sputtering, PECVD) \ \textbullet \ \ Surface Functionalization \ \textbullet \ \ Optical Simulations \ \textbullet \ \ Machine Learning \& RAG system adoption in R\&D \ \textbullet \ \ X-Ray Diffraction (XRD) \ \textbullet \ \ SEM, AFM, XPS, ATR \ \textbullet \ \ Spanish (Native) \ \textbullet \ \ English (Advanced)
+\par}
+
+% EXPERIENCE
+\vspace{24pt}
+\noindent{\sectionHeadingFont Experience}
+
+\vspace{4pt}
+\noindent\makebox[\linewidth]{\color{lightGray}\rule{\textwidth}{1pt}}
+
+% Experience 1
+\vspace{12pt}
+\noindent
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\expHeaderLeftFont Zanini Auto Group} & {\expHeaderRightFont 01/2026 -- Present} \\
+\end{tabular*}
+
+\vspace{4pt}
+\noindent{\expTitleFont Functional Surfaces R\&D Leader \& AI Adoption Head}
+
+\vspace{8pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont Engineered and implemented a comprehensive AI-first research curriculum for R\&D staff, achieving a 95\% edtech adoption rate across departments and significantly reducing prototyping cycles.
+  \item \listBodyFont Facilitated targeted training programs and workshops on Retrieval-Augmented Generation (RAG) systems, resulting in an average student/trainee evaluation score of 4.8/5.0.
+  \item \listBodyFont Fostered cross-functional mentoring initiatives, bridging data science and traditional engineering, which improved departmental retention by 22\% over the integration period.
 \end{itemize}
 
-% SECTION: Education
-\section{Education}
-\begin{itemize}[leftmargin=0.15in, label={}]
-  \resumeSubheading
-    {Universitat de Barcelona}{Barcelona, Spain}
-    {Doctor of Philosophy (Ph.D.), Nanoscience}{06/2021 -- 06/2026}
-    \begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-      \resumeItem{Developed advanced laboratory curricula for undergraduate physics courses, achieving course enrollment figures exceeding 120 students per semester.}
-      \resumeItem{Integrated rigorous active-learning pedagogies into the study of nanomaterials, consistently receiving top decile student evaluation scores.}
-    \end{itemize}
+% Experience 2
+\vspace{12pt}
+\noindent
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\expHeaderLeftFont Zanini Auto Group} & {\expHeaderRightFont 10/2019 -- 12/2025} \\
+\end{tabular*}
 
-  \resumeSubheading
-    {Universitat de Barcelona}{Barcelona, Spain}
-    {Master of Science (M.Sc.), Nanoscience and Nanotechnology}{09/2013 -- 06/2014}
-    \begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-      \resumeItem{Collaborated in surface engineering research groups, presenting foundational research at national congresses.}
-    \end{itemize}
+\vspace{4pt}
+\noindent{\expTitleFont Nano-Coatings R\&D Leader}
 
-  \resumeSubheading
-    {Universidad Pedagógica Nacional}{Bogotá, Colombia}
-    {Licentiate Degree, Physics (B.Ed. equivalent)}{02/2006 -- 11/2012}
-    \begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-      \resumeItem{Designed and executed structured curriculum development focused on physics education, improving high school student knowledge retention metrics by 18\%.}
-    \end{itemize}
+\vspace{8pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont Directed advanced materials and nano-coatings research, actively mentoring junior scientists and overseeing thesis projects to successful defense.
+  \item \listBodyFont Developed structured training modules for PVD magnetron sputtering and PECVD processes, standardizing knowledge transfer and increasing trainee operational independence by 40\%.
+  \item \listBodyFont Managed complex R\&D project lifecycles from concept to industrial scale, explicitly tying pedagogical methods to verifiable outcomes in applied optoelectronic modeling.
 \end{itemize}
 
-% SECTION: Publications \& Research
-\section{Publications \& Research}
-\begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-  \resumeItem{\textbf{Peer-Reviewed Publication:} J. Peralta, J. Esteve, A. Lousa. ``$\delta$-A15 and bcc phases coexist in sputtered chromium coatings with moderate oxygen contents.'' \textit{Thin Solid Films}, (2019). doi:10.1016/j.tsf.2019.137676.}
-  \resumeItem{\textbf{Patent:} A. Mayer, J. Peralta, J. M. Armengol. ``Radome for vehicles.'' EP3425730A1 (2019) \& WO2017211419A1 (2017).}
-  \resumeItem{\textbf{Conference Presentation:} ``Influence of N2 incorporation in the stability of reactive magnetron sputtering of N-doped TiO2 thin films.'' XV Congreso Nacional de Materiales, Salamanca, Spain (2018).}
-  \resumeItem{\textbf{Conference Presentation:} ``Stability under thermal cycling conditions of sputtered thin films deposited on polycarbonate.'' XIV Congreso Nacional de Materiales, Gijón, Spain (2016).}
+% Experience 3
+\vspace{12pt}
+\noindent
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\expHeaderLeftFont Zanini Auto Group} & {\expHeaderRightFont 05/2014 -- 10/2019} \\
+\end{tabular*}
+
+\vspace{4pt}
+\noindent{\expTitleFont Nano-Coatings Scientist \& Innovation Support}
+
+\vspace{8pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont Instructed manufacturing and quality control cohorts on RF transparent coatings and PVD technologies, supporting the successful launch of ADAS radome emblems (136\% production growth).
+  \item \listBodyFont Applied creative problem-solving and active learning frameworks to resolve industrial troubleshooting, reducing trial errors significantly during prototyping phases.
 \end{itemize}
 
-% SECTION: Grants \& Honors
-\section{Grants \& Honors}
-\begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-  \resumeItem{\textbf{Doctorats Industrials Grant (2014 -- 2017):} Secured highly competitive government funding (Generalitat de Cataluña), equivalent to top-tier NSF/NIH tracking metrics, to lead a pilot program merging academic research with industrial application.}
-  \resumeItem{\textbf{ADD Collaboration Grant (2013):} Awarded comprehensive scholarship by the Generalitat de Cataluña to support initial graduate studies and departmental research initiatives.}
+% EDUCATION
+\vspace{24pt}
+\noindent{\sectionHeadingFont Education}
+
+\vspace{4pt}
+\noindent\makebox[\linewidth]{\color{lightGray}\rule{\textwidth}{1pt}}
+
+% Education 1
+\vspace{12pt}
+\noindent
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\expHeaderLeftFont Universitat de Barcelona} & {\expHeaderRightFont 06/2021 -- 06/2026} \\
+\end{tabular*}
+
+\vspace{4pt}
+\noindent{\expTitleFont Doctor of Philosophy (Ph.D.), Nanoscience}
+
+\vspace{8pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont Developed advanced laboratory curricula for undergraduate physics courses, achieving course enrollment figures exceeding 120 students per semester.
+  \item \listBodyFont Integrated rigorous active-learning pedagogies into the study of nanomaterials, consistently receiving top decile student evaluation scores.
 \end{itemize}
 
-% SECTION: Skills
-\section{Skills}
-\begin{itemize}[leftmargin=0.2in, label={\textbullet}]
-  \resumeItem{\textbf{Pedagogical \& Academic:} Structured Curriculum Development, Active Learning, Mentoring, Public Speaking, EdTech Integration, Grant Writing.}
-  \resumeItem{\textbf{Technical \& Scientific:} Vacuum Technology (Sputtering, PECVD), Surface Functionalization, Optical Simulations, Machine Learning \& RAG system adoption in R\&D.}
-  \resumeItem{\textbf{Characterization:} X-Ray Diffraction (XRD), Scanning Electron Microscopy (SEM), Atomic Force Microscopy (AFM), XPS, ATR.}
-  \resumeItem{\textbf{Languages:} Spanish (Native), English (Advanced - TOEFL iBT 93).}
+% Education 2
+\vspace{12pt}
+\noindent
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\expHeaderLeftFont Universitat de Barcelona} & {\expHeaderRightFont 09/2013 -- 06/2014} \\
+\end{tabular*}
+
+\vspace{4pt}
+\noindent{\expTitleFont Master of Science (M.Sc.), Nanoscience and Nanotechnology}
+
+\vspace{8pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont Collaborated in surface engineering research groups, presenting foundational research at national congresses.
+\end{itemize}
+
+% Education 3
+\vspace{12pt}
+\noindent
+\begin{tabular*}{\textwidth}{@{}l@{\extracolsep{\fill}}r@{}}
+    {\expHeaderLeftFont Universidad Pedagógica Nacional} & {\expHeaderRightFont 02/2006 -- 11/2012} \\
+\end{tabular*}
+
+\vspace{4pt}
+\noindent{\expTitleFont Licentiate Degree, Physics (B.Ed. equivalent)}
+
+\vspace{8pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont Designed and executed structured curriculum development focused on physics education, improving high school student knowledge retention metrics by 18\%.
+\end{itemize}
+
+% PUBLICATIONS & RESEARCH
+\vspace{24pt}
+\noindent{\sectionHeadingFont Publications \& Research}
+
+\vspace{4pt}
+\noindent\makebox[\linewidth]{\color{lightGray}\rule{\textwidth}{1pt}}
+
+\vspace{12pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont \textbf{Peer-Reviewed Publication:} J. Peralta, J. Esteve, A. Lousa. ``$\delta$-A15 and bcc phases coexist in sputtered chromium coatings with moderate oxygen contents.'' \textit{Thin Solid Films}, (2019). doi:10.1016/j.tsf.2019.137676.
+  \item \listBodyFont \textbf{Patent:} A. Mayer, J. Peralta, J. M. Armengol. ``Radome for vehicles.'' EP3425730A1 (2019) \& WO2017211419A1 (2017).
+  \item \listBodyFont \textbf{Conference Presentation:} ``Influence of N2 incorporation in the stability of reactive magnetron sputtering of N-doped TiO2 thin films.'' XV Congreso Nacional de Materiales, Salamanca, Spain (2018).
+  \item \listBodyFont \textbf{Conference Presentation:} ``Stability under thermal cycling conditions of sputtered thin films deposited on polycarbonate.'' XIV Congreso Nacional de Materiales, Gijón, Spain (2016).
+\end{itemize}
+
+% GRANTS & HONORS
+\vspace{24pt}
+\noindent{\sectionHeadingFont Grants \& Honors}
+
+\vspace{4pt}
+\noindent\makebox[\linewidth]{\color{lightGray}\rule{\textwidth}{1pt}}
+
+\vspace{12pt}
+\begin{itemize}[leftmargin=20pt, label={\textbullet}, itemsep=8pt, parsep=0pt, topsep=0pt, partopsep=0pt]
+  \item \listBodyFont \textbf{Doctorats Industrials Grant (2014 -- 2017):} Secured highly competitive government funding (Generalitat de Cataluña), equivalent to top-tier NSF/NIH tracking metrics, to lead a pilot program merging academic research with industrial application.
+  \item \listBodyFont \textbf{ADD Collaboration Grant (2013):} Awarded comprehensive scholarship by the Generalitat de Cataluña to support initial graduate studies and departmental research initiatives.
 \end{itemize}
 
 \end{document}
